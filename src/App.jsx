@@ -2,7 +2,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchProducts} from "./store/productSlice.js";
 import ProductList from "./components/products/ProductList.jsx";
-import SideBar from "./components/ui/SideBar.jsx";
+import SideBar from "./components/products/SideBar.jsx";
 import {fetchProductsCategories} from "./store/categoriesSlice.js";
 
 function App() {

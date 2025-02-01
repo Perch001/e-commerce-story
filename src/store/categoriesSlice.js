@@ -8,7 +8,7 @@ export const fetchProductsCategories = createAsyncThunk(
             if (!response.ok) {
                 throw new Error("Server error");
             }
-            //const data = await response.json();
+
             return await response.json();
 
         }catch (error) {
