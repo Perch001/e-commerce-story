@@ -2,15 +2,21 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {fetchProducts} from "./store/productSlice.js";
 import ProductList from "./components/products/ProductList.jsx";
+import SideBar from "./components/ui/SideBar.jsx";
+import {fetchProductsCategories} from "./store/categoriesSlice.js";
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
-   dispatch(fetchProducts())
+      dispatch(fetchProducts())
+      dispatch(fetchProductsCategories())
   }, [dispatch]);
   return (
     <>
-      <ProductList />
+        <div className="flex">
+            <SideBar />
+            <ProductList />
+        </div>
     </>
   )
 }
