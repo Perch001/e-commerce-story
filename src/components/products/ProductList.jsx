@@ -4,7 +4,6 @@ import Card from "../ui/Card";
 
 const ProductList = () => {
     const products = useSelector(state => state.products.products);
-    console.log(products);
     return (
         <div className="grid grid-cols-4 gap-7">
             {products.map((product) => (

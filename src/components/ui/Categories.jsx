@@ -7,7 +7,7 @@ const Categories = () => {
     const visibleCategories = showAll ? categories : categories.slice(0, 5)
     return (
         <div>
-            <h3 className="text-lg font-semibold mb-5">Categories</h3>
+            <h3 className="text-xl font-semibold mb-5">Categories</h3>
             {visibleCategories.map((cat, index) => (
                 <div key={index} className="flex">
                     <p className="m-2 text-gray-500">{cat.name}</p>
