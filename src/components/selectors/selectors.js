@@ -7,4 +7,3 @@ export const selectUniqueBrands = createSelector(
         return [...new Set(brandName)];
     }
 )
-
