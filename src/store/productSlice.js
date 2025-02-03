@@ -44,6 +44,7 @@ const productSlice = createSlice({
     name: "products",
     initialState: {
         products: [],
+        categoryProduct: [],
         status: null,
         error: null,
     },
@@ -57,7 +58,6 @@ const productSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = "success";
                 state.products = action.payload;
-                state.selectedCategory = []
                 state.error = null;
             })
             .addCase(fetchProducts.rejected, setError)
@@ -67,7 +67,7 @@ const productSlice = createSlice({
             })
             .addCase(fetchProductsFromCategory.fulfilled, (state, action) => {
                 state.status = "success";
-                state.products = action.payload;
+                state.categoryProduct = action.payload;
                 state.error = null;
             })
             .addCase(fetchProductsFromCategory.rejected, setError)
