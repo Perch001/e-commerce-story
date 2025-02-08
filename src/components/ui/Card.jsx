@@ -1,6 +1,5 @@
 
 const Card = ({title, images, brand, price}) => {
-
     return (
         <>
             <div className="p-10 m-5 size-[400px] rounded-xl shadow-xl inset-shadow-xs hover:shadow-lg">

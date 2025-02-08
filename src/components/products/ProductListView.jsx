@@ -1,20 +1,21 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import Card from "../ui/Card";
+import Card from "../ui/Card.jsx";
+import ProductList from "../ui/ProductList.jsx";
 
-const ProductList = () => {
+const ProductListView = () => {
     const products = useSelector(state => state.products.products);
     const categoryProducts = useSelector(state => state.products.categoryProduct);
     const viewProducts = categoryProducts.length < 1 ? products : categoryProducts;
     return (
-        <div className="grid grid-cols-4 gap-7">
+        <div className="">
             {viewProducts.map((product) => (
                 <div key={product.id}>
-                    <Card {...product} />
+                    <ProductList {...product} />
                 </div>
             ))}
         </div>
     );
 };
 
-export default ProductList;
+export default ProductListView;

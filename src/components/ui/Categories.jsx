@@ -16,8 +16,8 @@ const Categories = () => {
         dispatch(fetchProductsFromCategory(editCategoryName))
     }
     return (
-        <div>
-            <h3 className="text-xl font-semibold mb-5">Categories</h3>
+        <>
+            <h3 className="text-2xl font-semibold mb-5">Product Categories</h3>
             {visibleCategories.map((cat, index) => (
                 <div key={index} className="flex">
                     <p onClick={() => getCategoryName(cat.name)} className={`m-2 cursor-pointer ${selected === cat.name.replace(" ", "-").toLowerCase() ? "text-black font-bold" : "text-gray-500"}`}>{cat.name}</p>
@@ -31,7 +31,7 @@ const Categories = () => {
                     {showAll ? "Hide all" : "Show all"}
                 </button>
             )}
-        </div>
+        </>
     );
 };
 
