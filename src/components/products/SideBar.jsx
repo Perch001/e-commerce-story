@@ -8,7 +8,7 @@ import {Button} from "antd";
 
 const SideBar = () => {
     return (
-        <div className="my-5 p-10 w-[350px]">
+        <div className="my-5 p-10 w-[400px]">
             <Categories />
             <Divider width="100%"/>
             <FilterProduct />

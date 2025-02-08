@@ -13,8 +13,8 @@ const HomePage = () => {
             <NavBar />
             <img
                 src="https://t3.ftcdn.net/jpg/03/01/03/56/360_F_301035626_MZ9n24LAELGzKiM2EZRnD8fWgDX8l5dx.jpg"
-                className="mx-auto mt-10" alt="backrounts"/>
-            <div className="-mt-10 flex bg-white p-10 w-[70%] mx-auto">
+                className="mt-10 mx-auto" alt="backrounts"/>
+            <div className="flex bg-white justify-center p-10">
                 <SideBar />
                 <div>
                     <div className="flex items-center justify-end">

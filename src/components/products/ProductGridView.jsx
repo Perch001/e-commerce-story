@@ -7,7 +7,7 @@ const ProductGridView = () => {
     const categoryProducts = useSelector(state => state.products.categoryProduct);
     const viewProducts = categoryProducts.length < 1 ? products : categoryProducts;
     return (
-        <div className="grid grid-cols-4 gap-7">
+        <div className="grid grid-cols-3 gap-2">
             {viewProducts.map((product) => (
                 <div key={product.id}>
                     <Card {...product} />
