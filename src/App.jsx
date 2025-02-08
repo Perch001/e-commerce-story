@@ -6,6 +6,7 @@ import SideBar from "./components/products/SideBar.jsx";
 import {fetchProductsCategories} from "./store/categoriesSlice.js";
 import ProductItem from "./components/products/ProductItem.jsx";
 import HomePage from "./components/pages/HomePage.jsx";
+import AppRoute from "./components/AppRoute.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -13,9 +14,10 @@ function App() {
       dispatch(fetchProducts())
       dispatch(fetchProductsCategories())
   }, [dispatch]);
+  const selectUser = false
   return (
     <>
-        <HomePage />
+        <AppRoute />
         {/*<ProductItem />*/}
         {/*<div className="flex">*/}
         {/*    <SideBar />*/}

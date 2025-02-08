@@ -9,12 +9,12 @@ const NavBar = () => {
                     <div className="flex items-center">
                         <h1 className="text-4xl font-bold">Lafka</h1>
                         <div>
-                            <a href="/">Home</a>
-                            <a href="/">Shop</a>
-                            <a href="/">About</a>
-                            <a href="/">Blog</a>
-                            <a href="/">Contact</a>
-                            <a href="/">About</a>
+                            <a href="/" className="mr-4">Home</a>
+                            <a href="/" className="mr-4">Shop</a>
+                            <a href="/" className="mr-4">About</a>
+                            <a href="/" className="mr-4">Blog</a>
+                            <a href="/" className="mr-4">Contact</a>
+                            <a href="/" className="mr-4">About</a>
                         </div>
                     </div>
                     <div className="flex justify-center mt-5">
