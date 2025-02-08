@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import NavBar from "./NavBar.jsx";
 import SideBar from "../products/SideBar.jsx";
 import ProductGridView from "../products/ProductGridView.jsx";
@@ -14,7 +14,7 @@ const HomePage = () => {
             <img
                 src="https://t3.ftcdn.net/jpg/03/01/03/56/360_F_301035626_MZ9n24LAELGzKiM2EZRnD8fWgDX8l5dx.jpg"
                 className="mx-auto mt-10" alt="backrounts"/>
-            <div className="absolute -mt-10 flex bg-white p-10 left-50">
+            <div className="-mt-10 flex bg-white p-10 w-[70%] mx-auto">
                 <SideBar />
                 <div>
                     <div className="flex items-center justify-end">
@@ -28,9 +28,6 @@ const HomePage = () => {
                     {isGridView ? <ProductGridView /> : <ProductListView />}
                 </div>
             </div>
-
-
-
         </>
     );
 };
