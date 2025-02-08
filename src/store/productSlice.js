@@ -23,7 +23,7 @@ export const fetchProducts = createAsyncThunk(
     "products/fetchProducts",
     async function fetchProductsAsync(_, {rejectWithValue}) {
         try {
-            const response = await fetch("https://dummyjson.com/products/")
+            const response = await fetch("https://dummyjson.com/products/?limit=0")
             if(!response.ok) {
                 throw new Error("Server error");
             }

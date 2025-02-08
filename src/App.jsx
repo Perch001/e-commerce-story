@@ -5,6 +5,7 @@ import ProductList from "./components/products/ProductList.jsx";
 import SideBar from "./components/products/SideBar.jsx";
 import {fetchProductsCategories} from "./store/categoriesSlice.js";
 import ProductItem from "./components/products/ProductItem.jsx";
+import HomePage from "./components/pages/HomePage.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,7 +15,8 @@ function App() {
   }, [dispatch]);
   return (
     <>
-        <ProductItem />
+        <HomePage />
+        {/*<ProductItem />*/}
         {/*<div className="flex">*/}
         {/*    <SideBar />*/}
         {/*    <ProductList />*/}
