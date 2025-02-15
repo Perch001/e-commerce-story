@@ -3,6 +3,7 @@ import {createContext, useContext, useEffect, useState} from "react";
 import {fetchProducts} from "./store/productSlice.js";
 import {fetchProductsCategories} from "./store/categoriesSlice.js";
 import AppRoute from "./components/AppRoute.jsx";
+import NavBar from "./components/pages/NavBar.jsx";
 
 const ListType = createContext(null);
 function App() {
@@ -17,6 +18,7 @@ function App() {
   return (
     <>
         <ListType.Provider value={{isGridView, GridView, ListView}}>
+            <NavBar/>
             <AppRoute />
         </ListType.Provider>
     </>

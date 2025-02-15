@@ -14,7 +14,6 @@ const NavBar = () => {
                             <a href="/" className="mr-4">About</a>
                             <a href="/" className="mr-4">Blog</a>
                             <a href="/" className="mr-4">Contact</a>
-                            <a href="/" className="mr-4">About</a>
                         </div>
                     </div>
                     <div className="flex justify-center mt-5">
