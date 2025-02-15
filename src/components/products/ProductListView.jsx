@@ -1,6 +1,5 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import Card from "../ui/Card.jsx";
 import ProductList from "../ui/ProductList.jsx";
 
 const ProductListView = () => {

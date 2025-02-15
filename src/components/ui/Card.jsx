@@ -1,8 +1,14 @@
+import {useNavigate} from "react-router-dom";
+import {memo} from "react";
 
-const Card = ({title, images, brand, price}) => {
+const Card = ({id, title, images, brand, price}) => {
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate(`/shop/product/${id}`)
+    }
     return (
         <>
-            <div className="p-10 m-5 size-[400px] rounded-xl shadow-xl inset-shadow-xs hover:shadow-lg">
+            <div className="p-10 m-5 size-[400px] rounded-xl shadow-xl inset-shadow-xs hover:shadow-lg" onClick={handleClick}>
                 <img
                     src={images[0]}
                     alt={title}
@@ -22,7 +28,7 @@ const Card = ({title, images, brand, price}) => {
                         <p>{brand}</p>
                     </div>
                     <div>
-                        <button className="border rounded-3xl p-3 hover:bg-black hover:text-white">${price}</button>
+                        <button className="border rounded-3xl p-3 hover:bg-black hover:text-white cursor-pointer">${price}</button>
                     </div>
                 </div>
             </div>

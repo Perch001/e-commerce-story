@@ -1,37 +1,38 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios'
 import {Divider, Rate} from "antd";
+import {useDispatch, useSelector} from "react-redux";
+import {useParams} from "react-router-dom";
+import {fetchOneProduct} from "../../store/productSlice.js";
 
 const ProductItem = () => {
-    const [products, setProducts] = useState([])
-    async function fetchProduct(id) {
-        try {
-            const response = await axios.get(`https://dummyjson.com/products/${id}`)
-            setProducts(response.data)
-        }catch (error) {
-            console.log(error.message);
-        }
-    }
+    const {id} = useParams();
+    const dispatch = useDispatch();
+    const {product, status, error} = useSelector((state) => state.product);
     useEffect(() => {
-        fetchProduct(43)
-    }, [])
-    console.log(products)
+        dispatch(fetchOneProduct(id))
+    }, [dispatch, id]);
+
+    if (status === "loading") {
+        return <h2>Loading...</h2>;
+    }
+
+    if (status === "failed") {
+        return <h2>Error: {error}</h2>;
+    }
     return (
         <div className="flex">
+
             <div>
-                <img src={products.images?.[0]} alt={products.title} className="size-[1000px]"/>
+                <img src={product.images?.[0]} alt={product.title} className="size-[500px]"/>
             </div>
             <div className="bg-gray-200">
-                <h1>{products.title}</h1>
+                <h1>{product.title}</h1>
                 <Divider />
                 <div className="flex items-center">
-                    <p>${products.price}</p>
-                    <Rate defaultValue={products.rating} disabled />
-                    <p>{products.rating}</p>
-                </div>
-                <div>
-                    <p>Tags:</p>
-                    {products.tags}
+                    <p>${product.price}</p>
+                    <Rate defaultValue={product.rating} disabled />
+                    <p>{product.rating}</p>
                 </div>
                 <div>
 
