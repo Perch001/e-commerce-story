@@ -2,12 +2,13 @@ import React from 'react';
 import {useSelector} from "react-redux";
 import Card from "../ui/Card";
 
-const ProductList = () => {
+const ProductGridView = () => {
     const products = useSelector(state => state.products.products);
-
+    const categoryProducts = useSelector(state => state.products.categoryProduct);
+    const viewProducts = categoryProducts.length < 1 ? products : categoryProducts;
     return (
-        <div className="grid grid-cols-4 gap-7">
-            {products.map((product) => (
+        <div className="grid grid-cols-3 gap-2">
+            {viewProducts.map((product) => (
                 <div key={product.id}>
                     <Card {...product} />
                 </div>
@@ -16,4 +17,4 @@ const ProductList = () => {
     );
 };
 
-export default ProductList;
+export default ProductGridView;

@@ -1,11 +1,15 @@
 import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import {fetchProducts} from "./store/productSlice.js";
-import ProductList from "./components/products/ProductList.jsx";
-import SideBar from "./components/products/SideBar.jsx";
 import {fetchProductsCategories} from "./store/categoriesSlice.js";
+import AppRoute from "./components/AppRoute.jsx";
+import NavBar from "./components/pages/NavBar.jsx";
 
+const ListType = createContext(null);
 function App() {
+    const [isGridView, setIsGridView] = useState(true);
+    const GridView = () => setIsGridView(true);
+    const ListView = () => setIsGridView(false);
   const dispatch = useDispatch();
   useEffect(() => {
       dispatch(fetchProducts())
@@ -13,12 +17,13 @@ function App() {
   }, [dispatch]);
   return (
     <>
-        <div className="flex">
-            <SideBar />
-            <ProductList />
-        </div>
+        <ListType.Provider value={{isGridView, GridView, ListView}}>
+            <NavBar/>
+            <AppRoute />
+        </ListType.Provider>
     </>
   )
 }
 
 export default App
+export const useView = () => useContext(ListType)

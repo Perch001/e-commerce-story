@@ -1,6 +1,23 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 
+///TEST============================================
+
+// export const fetchOneProduct = createAsyncThunk(
+//     "products/fetchOneProduct",
+//     async function fetchOneProductAsync(id, {rejectWithValue}) {
+//         try {
+//             const response = await fetch(`https://dummyjson.com/products/${id}`);
+//             if(!response.ok) {
+//                 throw new Error("Product not found");
+//             }
+//             return await response.json();
+//         }catch (error) {
+//             return rejectWithValue(error.message);
+//         }
+//     }
+// )
+
 
 export const fetchProducts = createAsyncThunk(
     "products/fetchProducts",
@@ -17,6 +34,7 @@ export const fetchProducts = createAsyncThunk(
         }
     }
 )
+
 
 export const fetchProductsFromCategory = createAsyncThunk(
     "products/fetchProductsFromCategory",
@@ -44,6 +62,7 @@ const productSlice = createSlice({
     name: "products",
     initialState: {
         products: [],
+        categoryProduct: [],
         status: null,
         error: null,
     },
@@ -57,7 +76,6 @@ const productSlice = createSlice({
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = "success";
                 state.products = action.payload;
-                state.selectedCategory = []
                 state.error = null;
             })
             .addCase(fetchProducts.rejected, setError)
@@ -67,7 +85,7 @@ const productSlice = createSlice({
             })
             .addCase(fetchProductsFromCategory.fulfilled, (state, action) => {
                 state.status = "success";
-                state.products = action.payload;
+                state.categoryProduct = action.payload;
                 state.error = null;
             })
             .addCase(fetchProductsFromCategory.rejected, setError)

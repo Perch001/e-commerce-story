@@ -8,17 +8,19 @@ const Categories = () => {
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.categories.categories);
     const [showAll, setShowAll] = useState(false);
+    const [selected, setSelected] = useState(null);
     const visibleCategories = showAll ? categories : categories.slice(0, 5)
     const getCategoryName = (category) => {
         const editCategoryName = category.replace(" ", "-").toLowerCase();
+        setSelected(editCategoryName);
         dispatch(fetchProductsFromCategory(editCategoryName))
     }
     return (
-        <div>
-            <h3 className="text-xl font-semibold mb-5">Categories</h3>
+        <>
+            <h3 className="text-2xl font-semibold mb-5">Product Categories</h3>
             {visibleCategories.map((cat, index) => (
                 <div key={index} className="flex">
-                    <p onClick={() => getCategoryName(cat.name)} className={"m-2 cursor-pointer text-gray-600"}>{cat.name}</p>
+                    <p onClick={() => getCategoryName(cat.name)} className={`m-2 cursor-pointer ${selected === cat.name.replace(" ", "-").toLowerCase() ? "text-black font-bold" : "text-gray-500"}`}>{cat.name}</p>
                 </div>
             ))}
             {categories.length > 5 && (
@@ -29,7 +31,7 @@ const Categories = () => {
                     {showAll ? "Hide all" : "Show all"}
                 </button>
             )}
-        </div>
+        </>
     );
 };
 
