@@ -22,10 +22,10 @@ const NavBar = () => {
                             <img src={SearchSVG} alt="search" className="size-7"/>
                             <span>Search</span>
                         </div>
-                        <div className="flex items-center">
+                        <NavLink to='/basket' className="flex items-center">
                             <img src={ShoppingCard} alt="Card" className="size-7" />
                             <span>Card(0)</span>
-                        </div>
+                        </NavLink>
                     </div>
                 </div>
             </div>
