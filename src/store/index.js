@@ -1,11 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit";
-import productSlice from "./productSlice.js";
+import productsListSlice from "./productsListSlice.js";
 import categoriesSlice from "./categoriesSlice.js";
+import productSlice from "./productSlice.js";
 
 
 export default configureStore({
     reducer: {
-        products: productSlice,
+        products: productsListSlice,
+        product: productSlice,
         categories: categoriesSlice,
     }
 })

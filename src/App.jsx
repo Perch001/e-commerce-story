@@ -1,6 +1,6 @@
 import {useDispatch, useSelector} from "react-redux";
 import {createContext, useContext, useEffect, useState} from "react";
-import {fetchProducts} from "./store/productSlice.js";
+import {fetchProducts} from "./store/productsListSlice.js";
 import {fetchProductsCategories} from "./store/categoriesSlice.js";
 import AppRoute from "./components/AppRoute.jsx";
 import NavBar from "./components/pages/NavBar.jsx";

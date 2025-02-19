@@ -1,15 +1,15 @@
 import React from 'react';
-import NavBar from "./NavBar.jsx";
-import SideBar from "../products/SideBar.jsx";
-import ProductGridView from "../products/ProductGridView.jsx";
-import ProductListView from "../products/ProductListView.jsx";
-import {useView} from "../../App.jsx";
-import GridViewSVG from "../assets/apps.svg"
-import ListViewSVG from "../assets/menu-burger.svg"
-const HomePage = () => {
+import SideBar from "../../products/SideBar.jsx";
+import GridViewSVG from "../../assets/apps.svg";
+import ListViewSVG from "../../assets/menu-burger.svg";
+import ProductGridView from "../../products/ProductGridView.jsx";
+import ProductListView from "../../products/ProductListView.jsx";
+import {useView} from "../../../App.jsx";
+
+const ShopPage = () => {
     const {isGridView, GridView , ListView} = useView();
     return (
-        <>
+        <div>
             <img
                 src="https://t3.ftcdn.net/jpg/03/01/03/56/360_F_301035626_MZ9n24LAELGzKiM2EZRnD8fWgDX8l5dx.jpg"
                 className="mt-10 mx-auto" alt="backrounts"/>
@@ -27,8 +27,8 @@ const HomePage = () => {
                     {isGridView ? <ProductGridView /> : <ProductListView />}
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
-export default HomePage;
+export default ShopPage;
