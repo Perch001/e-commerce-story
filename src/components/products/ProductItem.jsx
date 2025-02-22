@@ -9,7 +9,7 @@ import twitter from '../assets/twitter.svg';
 import instagram from '../assets/instagram.svg';
 
 const ProductItem = () => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     const [active, setActive] = useState(true);
     const {id} = useParams();
     const dispatch = useDispatch();
@@ -112,9 +112,7 @@ const ProductItem = () => {
                         ))}
                     </div>
                 }
-
             </div>
-
         </div>
     );
 };
