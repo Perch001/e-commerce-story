@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios'
 import {Avatar, Divider, Rate} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
@@ -7,9 +6,10 @@ import {fetchOneProduct} from "../../store/productSlice.js";
 import facebook from '../assets/facebook.svg';
 import twitter from '../assets/twitter.svg';
 import instagram from '../assets/instagram.svg';
+import {addToCard} from "../../store/CardSlice.js";
 
 const ProductItem = () => {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(1);
     const [active, setActive] = useState(true);
     const {id} = useParams();
     const dispatch = useDispatch();
@@ -26,7 +26,6 @@ const ProductItem = () => {
         }
     }
 
-
     const formatDate = (isoDate) => {
         const date = new Date(isoDate);
         return date.toISOString().replace("T", " ").substring(0, 16);
@@ -39,6 +38,21 @@ const ProductItem = () => {
     if (status === "failed") {
         return <h2>Error: {error}</h2>;
     }
+
+    const handleAddCard = () => {
+        const data = {
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            quantity: count,
+            total: 10,
+            discountPercentage: product.discountPercentage,
+            discountedTotal: count * (product.price - (product.price * product.discountPercentage) / 100),
+            thumbnail: product.thumbnail,
+        };
+        dispatch(addToCard(data));
+    };
+
     return (
         <div className="container mx-auto">
             <div className="flex mt-10">
@@ -69,7 +83,7 @@ const ProductItem = () => {
                             <button className="bg-gray-300 px-4 py-2" onClick={increment}>+</button>
                         </div>
                         <div>
-                            <button disabled={count <= 0} className={`p-2  rounded-md ${count <= 0 ? "bg-gray-300" : "bg-gray-400 text-white"}`}>ADD TO CARD</button>
+                            <button disabled={count <= 0} className={`p-2  rounded-md ${count <= 0 ? "bg-gray-300" : "bg-gray-400 text-white"}`} onClick={handleAddCard}>ADD TO CARD</button>
                         </div>
                     </div>
 
@@ -112,9 +126,7 @@ const ProductItem = () => {
                         ))}
                     </div>
                 }
-
             </div>
-
         </div>
     );
 };

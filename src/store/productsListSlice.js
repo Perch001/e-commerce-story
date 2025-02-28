@@ -1,11 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
-
-///TEST============================================
-
-
-
-
 export const fetchProducts = createAsyncThunk(
     "products/fetchProducts",
     async function fetchProductsAsync(_, {rejectWithValue}) {
