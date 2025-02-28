@@ -10,14 +10,14 @@ const BasketPage = () => {
     console.log(cards);
     useEffect(() => {
         dispatch(fetchCardProducts())
-    })
+    },[dispatch])
 
     return (
         <div className="container mx-auto flex justify-between mt-20">
             <div className="flex-1 mr-40">
-                <BasketList />
-                <BasketList />
-                <BasketList />
+                {cards.map((product) => (
+                    <BasketList {...product} key={product.id} />
+                ))}
             </div>
             <BasketCheck />
         </div>
