@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Avatar, Divider, Rate} from "antd";
+import {Avatar, Button, Divider, message, Rate} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {fetchOneProduct} from "../../store/productSlice.js";
@@ -10,10 +10,19 @@ import {addToCard} from "../../store/CardSlice.js";
 
 const ProductItem = () => {
     const [count, setCount] = useState(1);
+    const [loadingBtn, setLoadingBtn] = useState(false);
     const [active, setActive] = useState(true);
     const {id} = useParams();
     const dispatch = useDispatch();
     const {product, status, error} = useSelector((state) => state.product);
+    const [messageApi, contextHolder] = message.useMessage();
+    const success = () => {
+        messageApi.open({
+            type: 'success',
+            content: `Товар ${product.title} был добавлен в корзину!`,
+            duration: 3,
+        });
+    };
     useEffect(() => {
         dispatch(fetchOneProduct(id))
     }, [dispatch, id]);
@@ -51,10 +60,21 @@ const ProductItem = () => {
             thumbnail: product.thumbnail,
         };
         dispatch(addToCard(data));
+        setLoadingBtn(true);
+        setTimeout(() => {
+            setLoadingBtn(false);
+        }, 2000)
+        success()
     };
+
+
+
+
+
 
     return (
         <div className="container mx-auto">
+            {contextHolder}
             <div className="flex mt-10">
                 <div>
                     <img src={product.images?.[0]} alt={product.title} className="size-[600px] object-contain"/>
@@ -83,7 +103,7 @@ const ProductItem = () => {
                             <button className="bg-gray-300 px-4 py-2" onClick={increment}>+</button>
                         </div>
                         <div>
-                            <button disabled={count <= 0} className={`p-2  rounded-md ${count <= 0 ? "bg-gray-300" : "bg-gray-400 text-white"}`} onClick={handleAddCard}>ADD TO CARD</button>
+                            <Button size="large" type="primary" disabled={count <= 0} onClick={handleAddCard} loading={loadingBtn}>ADD TO CARD</Button>
                         </div>
                     </div>
 
