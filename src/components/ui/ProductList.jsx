@@ -8,7 +8,7 @@ const ProductList = ({id, title, images, brand, price, tags, rating, description
     }
     return (
         <>
-            <div className="p-10 m-5 flex items-center rounded-3xl shadow-lg justify-between w-[1200px] mx-auto" onClick={handleClick}>
+            <div className="p-10 m-5 flex items-center rounded-3xl shadow-lg justify-between mx-auto" onClick={handleClick}>
                 <img
                     src={images[0]}
                     alt={title}

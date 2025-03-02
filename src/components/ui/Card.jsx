@@ -1,5 +1,4 @@
 import {useNavigate} from "react-router-dom";
-import {memo} from "react";
 
 const Card = ({id, title, images, brand, price}) => {
     const navigate = useNavigate();

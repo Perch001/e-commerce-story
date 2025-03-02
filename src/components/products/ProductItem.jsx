@@ -67,11 +67,6 @@ const ProductItem = () => {
         success()
     };
 
-
-
-
-
-
     return (
         <div className="container mx-auto">
             {contextHolder}

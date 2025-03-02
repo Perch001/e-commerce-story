@@ -13,7 +13,7 @@ const ShopPage = () => {
             <img
                 src="https://t3.ftcdn.net/jpg/03/01/03/56/360_F_301035626_MZ9n24LAELGzKiM2EZRnD8fWgDX8l5dx.jpg"
                 className="mt-10 mx-auto" alt="backrounts"/>
-            <div className="flex bg-white justify-center p-10">
+            <div className="flex flex-1 bg-white justify-center p-10">
                 <SideBar />
                 <div>
                     <div className="flex items-center justify-end">
