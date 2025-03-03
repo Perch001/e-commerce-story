@@ -4,6 +4,7 @@ import {fetchProducts} from "./store/productsListSlice.js";
 import {fetchProductsCategories} from "./store/categoriesSlice.js";
 import AppRoute from "./components/AppRoute.jsx";
 import NavBar from "./components/pages/NavBar.jsx";
+import {fetchCardProducts} from "./store/CardSlice.js";
 
 const ListType = createContext(null);
 function App() {
@@ -14,6 +15,7 @@ function App() {
   useEffect(() => {
       dispatch(fetchProducts())
       dispatch(fetchProductsCategories())
+      dispatch(fetchCardProducts())
   }, [dispatch]);
   return (
     <>

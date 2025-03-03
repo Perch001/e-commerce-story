@@ -1,9 +1,8 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {data} from "react-router-dom";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
+// ✅ Добавляем товар в корзину
 export const addToCard = createAsyncThunk(
-    "products/addToCard",
+    "card/addToCard",
     async function (product, { rejectWithValue }) {
         try {
             const response = await fetch("https://db58a26eb1ef8e43.mokky.dev/carts/", {
@@ -18,49 +17,56 @@ export const addToCard = createAsyncThunk(
             if (!response.ok) {
                 throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
             }
-            const data = await response.json();
-            return data;
+            return await response.json();
         } catch (error) {
             return rejectWithValue({ message: error.message });
         }
     }
 );
+
+// ✅ Удаляем товар из корзины
 export const deleteProduct = createAsyncThunk(
-    "products/deleteProduct",
-    async function(id, {rejectWithValue}) {
+    "card/deleteProduct",
+    async function (id, { rejectWithValue }) {
         try {
             const response = await fetch(`https://db58a26eb1ef8e43.mokky.dev/carts/${id}`, {
                 method: "DELETE",
-            })
+            });
+
             if (!response.ok) {
-                throw new Error("Server error");
+                throw new Error("Ошибка сервера");
             }
             return id;
-        }catch (error) {
+        } catch (error) {
             return rejectWithValue(error.message);
         }
     }
-)
+);
+
+// ✅ Загружаем корзину
 export const fetchCardProducts = createAsyncThunk(
-    "fetchCardProducts",
-    async function fetchCardProductsAsync(_, {rejectWithValue}) {
+    "card/fetchCardProducts", // Исправили название
+    async function (_, { rejectWithValue }) {
         try {
-            const response = await fetch("https://db58a26eb1ef8e43.mokky.dev/carts")
-            if(!response.ok){
+            const response = await fetch("https://db58a26eb1ef8e43.mokky.dev/carts");
+
+            if (!response.ok) {
                 throw Error(response.statusText);
             }
-            const data = await response.json();
-            return data;
-        }catch (error){
+            return await response.json();
+        } catch (error) {
             return rejectWithValue(error.message);
         }
     }
-)
-const setError = (state, action) => {
-    state.status = "rejected"
-    state.error = action.payload;
-}
+);
 
+// Функция для обработки ошибок
+const setError = (state, action) => {
+    state.status = "rejected";
+    state.error = action.payload;
+};
+
+// ✅ Создаем `slice`
 const cardSlice = createSlice({
     name: "card",
     initialState: {
@@ -68,16 +74,10 @@ const cardSlice = createSlice({
         status: null,
         error: null,
     },
-    reducers: {
-        addCard: (state, action) => {
-            state.cards.push(action.payload);
-        },
-        removeCard: (state, action) => {
-            state.cards = state.cards.filter(card => card.id !== action.payload)
-        }
-    },
+    reducers: {},
     extraReducers: (builder) => {
         builder
+            // 🔹 Загружаем корзину
             .addCase(fetchCardProducts.pending, (state) => {
                 state.status = "pending";
                 state.error = null;
@@ -88,10 +88,20 @@ const cardSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchCardProducts.rejected, setError)
-            .addCase(deleteProduct.fulfilled, (state, action) => { // ✅ Удаляем сразу после успешного ответа
+            // 🔹 Удаляем товар
+            .addCase(deleteProduct.fulfilled, (state, action) => {
                 state.cards = state.cards.filter(card => card.id !== action.payload);
-            });
+            })
+            // 🔹 Добавляем товар
+            .addCase(addToCard.pending, (state) => {
+                state.status = "loading";
+            })
+            .addCase(addToCard.fulfilled, (state, action) => {
+                state.status = "succeeded";
+                state.cards.push(action.payload);
+            })
+            .addCase(addToCard.rejected, setError);
     }
-})
-export const {removeCard, addCard} = cardSlice.actions;
+});
+
 export default cardSlice.reducer;

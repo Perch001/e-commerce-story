@@ -1,8 +1,11 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import SearchSVG from '../assets/search.svg'
 import ShoppingCard from '../assets/shopping-cart.svg'
 import {NavLink} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchCardProducts} from "../../store/CardSlice.js";
 const NavBar = () => {
+    const cards = useSelector(state => state.card.cards.length);
     return (
         <>
             <div className='container mx-auto mt-5 text-xl'>
@@ -24,7 +27,7 @@ const NavBar = () => {
                         </div>
                         <NavLink to='/basket' className="flex items-center">
                             <img src={ShoppingCard} alt="Card" className="size-7" />
-                            <span>Card(0)</span>
+                            <span>Card({cards})</span>
                         </NavLink>
                     </div>
                 </div>
