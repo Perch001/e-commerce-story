@@ -10,7 +10,7 @@ const BasketPage = () => {
     useEffect(() => {
         dispatch(fetchCardProducts())
     },[dispatch])
-
+    console.log(cards)
     return (
         <div className="container mx-auto flex justify-between mt-20">
             <div className="flex-1 mr-40">

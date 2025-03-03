@@ -1,23 +1,39 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // ✅ Добавляем товар в корзину
 export const addToCard = createAsyncThunk(
     "card/addToCard",
-    async function (product, { rejectWithValue }) {
-        try {
-            const response = await fetch("https://db58a26eb1ef8e43.mokky.dev/carts/", {
-                method: "POST",
-                body: JSON.stringify(product),
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                },
-            });
+    async function (product, {getState, rejectWithValue }) {
 
-            if (!response.ok) {
-                throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
+        try {
+            const state = getState();
+            const existingItem = state.card.cards.find((existingItem) => existingItem.title === product.title);
+            if(existingItem) {
+                await axios.patch(`https://db58a26eb1ef8e43.mokky.dev/carts/${existingItem.id}`, {
+                    count: existingItem.count + 1,
+                })
+                return {...existingItem, count: existingItem.count + 1}
+            }else{
+                const response = await axios.post("https://db58a26eb1ef8e43.mokky.dev/carts/", {
+                    ...product,
+                    count: 1,
+                })
+                return response.data;
             }
-            return await response.json();
+            // const response = await fetch("https://db58a26eb1ef8e43.mokky.dev/carts/", {
+            //     method: "POST",
+            //     body: JSON.stringify(product),
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         Accept: "application/json",
+            //     },
+            // });
+            //
+            // if (!response.ok) {
+            //     throw new Error(`Ошибка ${response.status}: ${response.statusText}`);
+            // }
+            // return await response.json();
         } catch (error) {
             return rejectWithValue({ message: error.message });
         }

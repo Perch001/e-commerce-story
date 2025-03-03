@@ -4,7 +4,7 @@ import {useDispatch} from "react-redux";
 import {deleteProduct} from "../../../store/CardSlice.js";
 
 
-const BasketList = ({id, title, price, quantity, thumbnail}) => {
+const BasketList = ({id, title, price, quantity, thumbnail, count}) => {
     const [quality, setQuality] = useState(quantity);
     const dispatch = useDispatch();
     const decrement = () => {
@@ -26,7 +26,7 @@ const BasketList = ({id, title, price, quantity, thumbnail}) => {
                 <div className="flex items-center justify-between px-5 border rounded-md w-40 h-10">
                     <p>Count</p>
                     <button onClick={decrement}>{"<"}</button>
-                    <span>{quality}</span>
+                    <span>{count}</span>
                     <button onClick={() => setQuality(quality + 1)}>{">"}</button>
                 </div>
                 <div className="w-[100px]">

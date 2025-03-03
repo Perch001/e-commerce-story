@@ -16,6 +16,7 @@ const ProductItem = () => {
     const dispatch = useDispatch();
     const {product, status, error} = useSelector((state) => state.product);
     const [messageApi, contextHolder] = message.useMessage();
+
     const success = () => {
         messageApi.open({
             type: 'success',
